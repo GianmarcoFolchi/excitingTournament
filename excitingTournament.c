@@ -15,8 +15,8 @@ struct Node {
 void preOrderPrint(Node * root);
 void postOrderPrint(Node * root);
 int nullNodeCounter(Node * root, int counter); 
-int findExcitementValue(Node * root);
 int findWinner(Node * root);
+long long int findExcitementValue(Node * root);
 Node * insertTable(Node * root, int value);
 Node * createNode(int value);
 Node * insertPlayer(Node * root, int skill);
@@ -29,6 +29,11 @@ int main() {
     //printf("Input the number of players \n"); 
     scanf(" %d", &numPlayers); //scan in the number of players 
     int actOrder[numPlayers], skillLevels[numPlayers]; 
+
+    if (numPlayers <= 1) {
+        printf("0");
+        return 0; 
+    }
 
     //printf("input the table activation order\n"); 
     for (i = numPlayers - 2; i != -1 ; i--) //scanning the table activation order in reverse order 
@@ -45,8 +50,8 @@ int main() {
         scanf(" %d", &skillLevels[i]); 
         root = insertPlayer(root, skillLevels[i]);
     }
-    int excitement = findExcitementValue(root); 
-    printf("The total excitement = %d ", excitement); 
+    long long int excitement = findExcitementValue(root); 
+    printf("%lld ", excitement); 
     return excitement; 
 }
 
@@ -100,8 +105,8 @@ Node * createNode(int value) {
     return ret; 
 }
 
-int findExcitementValue(Node * root) {
-    int excitement = 0; 
+long long int findExcitementValue(Node * root) {
+    long long int excitement = 0; 
 
     if (root->left->value != 0) //if there is a table to the left, go there 
         excitement += findExcitementValue(root->left); 
